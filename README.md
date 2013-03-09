@@ -3,28 +3,28 @@
 Include the validation library
 
 	require_once 'validator.php';
-	
+
 Initial the Validator object by `$_POST`
 
 	$validator = Validator::factory($_POST);
-	
+
 The example of $_POST like:
 
 	$_POST = array(
-		'username' => "", 
-		'password' => "123456", 
-		'confirm_password' => "125", 
-		'first_name' => "123", 
+		'username' => "",
+		'password' => "123456",
+		'confirm_password' => "125",
+		'first_name' => "123",
 		'telephone' => '123456789',
-		'email' => "abc@abc", 
-		'emails' => "abc@abc.com,abc@abc.com,abc", 
-		'url' => "http://127.0.0.1/()", 
+		'email' => "abc@abc",
+		'emails' => "abc@abc.com,abc@abc.com,abc",
+		'url' => "http://127.0.0.1/()",
 		'ip' => '127.0.0.1a',
-		'title' => '123a', 
-		'age' => 17, 
+		'title' => '123a',
+		'age' => 17,
 		'custom' => "2001-12",
 	);
-	
+
 Then, add the **target keys/fields** and **checking rules**
 
 	$validator = Validator::factory($data);
@@ -45,7 +45,7 @@ Then, add the **target keys/fields** and **checking rules**
 	$validator->add('custom', '自定格式不正確')->rule('custom', function($val) {
 		return preg_match('/2001\-10/', $val) > 0;
 	});
-	
+
 But, you can make it chainable like
 
 	$validator->add('username', '請輸入暱稱')->rule('required')
@@ -65,7 +65,7 @@ But, you can make it chainable like
 			  ->add('custom', '自定格式不正確')->rule('custom', function($val) {
 						return preg_match('/2001\-10/', $val) > 0;
 				})->rule('valid_string', array('utf8', 'alpha', 'lowercase'));
-				
+
 Finally, when you added rules completely, you can run the checking.
 
 	if ($validator->run() === true) {
@@ -73,13 +73,13 @@ Finally, when you added rules completely, you can run the checking.
 			echo "<p>",$error,"</p>";
 		}
 	}
-	
-The method `$validator->run()` will return the status of validation (true is contain error), the `$validator->error()` will contain all error messages. if you just want to show first error message, you can use method: `$validator->first_error()`
+
+The method `$validator->run()` or alias method `$validator->valid()` will return the status of validation (true is contain error), the `$validator->error()` will contain all error messages. if you just want to show first error message, you can use method: `$validator->first_error()`
 
 	if ($validator->run() === true) {
 		echo $validator->first_error(); // pop first error
 	}
-	
+
 All avaliable method:
 
 	required

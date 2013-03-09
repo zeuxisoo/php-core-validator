@@ -58,6 +58,10 @@ class Validator {
 		return empty($this->errors) === false;
 	}
 
+	public function valid() {
+		return $this->run();
+	}
+
 	public function errors() {
 		return $this->errors;
 	}
