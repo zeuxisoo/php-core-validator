@@ -1,5 +1,5 @@
 <?php
-error_reporting(E_ALL);
+namespace Zeuxisoo\Core;
 
 class Validator {
 	private static $instance = null;
@@ -39,7 +39,7 @@ class Validator {
 		return $this;
 	}
 
-	public function run() {
+	public function valid() {
 		foreach($this->rule_datas as $rule_data) {
 			$field_value = isset($this->form_datas[$rule_data['field_name']]) === true ? $this->form_datas[$rule_data['field_name']] : "";
 
@@ -55,11 +55,11 @@ class Validator {
 			}
 		}
 
-		return empty($this->errors) === false;
+		return empty($this->errors);
 	}
 
-	public function valid() {
-		return $this->run();
+	public function inValid() {
+		return $this->valid() === false;
 	}
 
 	public function errors() {

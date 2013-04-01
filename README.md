@@ -1,8 +1,8 @@
 ### Usage
 
-Include the validation library
+Load the validation library
 
-	require_once 'validator.php';
+	use \Zeuxisoo\Core\Validator;
 
 Initial the Validator object by `$_POST`
 
@@ -28,55 +28,55 @@ The example of $_POST like:
 Then, add the **target keys/fields** and **checking rules**
 
 	$validator = Validator::factory($data);
-	$validator->add('username', '請輸入暱稱')->rule('required');
-	$validator->add('username', '暱稱最少需要4個字元')->rule('min_length', 4);	// empty so not show
-	$validator->add('password', '密碼不相符 MatchValue')->rule('match_value', $data['confirm_password']);
-	$validator->add('first_name', '名字開頭必須是英文字母')->rule('match_pattern', '/^[A-Za-z]/');
-	$validator->add('password', '密碼不相符 MatchField')->rule('match_field', 'confirm_password');
-	$validator->add('confirm_password', '確認密碼長度最少 4 個位')->rule('min_length', 4);
-	$validator->add('telephone', '電話號碼長度最多 8 個位')->rule('max_length', 8);
-	$validator->add('telephone', '電話號碼長度必須等於 8 個位')->rule('exact_length', 8);
-	$validator->add('email', '不是電郵地址格式 單個')->rule('valid_email');
-	$validator->add('url', '不是網址格式')->rule('valid_url');
-	$validator->add('ip', '不是 IP 地址格式')->rule('valid_ip');
-	$validator->add('title', '不是純字母')->rule('valid_string');
-	$validator->add('age', '小於 18 歲')->rule('numeric_min', 18);
-	$validator->add('age', '大於 16 歲')->rule('numeric_max', 16);
-	$validator->add('custom', '自定格式不正確')->rule('custom', function($val) {
+	$validator->add('username', 'Pleas enter username')->rule('required');
+	$validator->add('username', 'The username must less than 4 char')->rule('min_length', 4);	// empty so not show
+	$validator->add('password', 'Password not match input value')->rule('match_value', $data['confirm_password']);
+	$validator->add('first_name', 'The first name not match given pattern')->rule('match_pattern', '/^[A-Za-z]/');
+	$validator->add('password', 'Password not match given field')->rule('match_field', 'confirm_password');
+	$validator->add('confirm_password', 'Confirm password must more than 4 char')->rule('min_length', 4);
+	$validator->add('telephone', 'The telephone number must less than 8 char')->rule('max_length', 8);
+	$validator->add('telephone', 'The telephone number length must equals 8 char')->rule('exact_length', 8);
+	$validator->add('email', 'Invalid email address')->rule('valid_email');
+	$validator->add('url', 'Invalid email address')->rule('valid_url');
+	$validator->add('ip', 'Invalid ip address')->rule('valid_ip');
+	$validator->add('title', 'The string is not alpha string')->rule('valid_string');
+	$validator->add('age', 'The age must less than 18 age')->rule('numeric_min', 18);
+	$validator->add('age', 'The age must bigger than 16 age')->rule('numeric_max', 16);
+	$validator->add('custom', 'The value is not much the custom format')->rule('custom', function($val) {
 		return preg_match('/2001\-10/', $val) > 0;
 	});
 
 But, you can make it chainable like
 
-	$validator->add('username', '請輸入暱稱')->rule('required')
-			  ->add('username', '暱稱最少需要4個字元')->rule('min_length', 4)
-			  ->add('password', '密碼不相符 MatchValue')->rule('match_value', $data['confirm_password'])
-			  ->add('first_name', '名字開頭必須是英文字母')->rule('match_pattern', '/^[A-Za-z]/')
-			  ->add('password', '密碼不相符 MatchField')->rule('match_field', 'confirm_password')
-			  ->add('confirm_password', '確認密碼長度最少 4 個位')->rule('min_length', 4)
-			  ->add('telephone', '電話號碼長度最多 8 個位')->rule('max_length', 8)
-			  ->add('telephone', '電話號碼長度必須等於 8 個位')->rule('exact_length', 8)
-			  ->add('email', '不是電郵地址格式 單個')->rule('valid_email')
-			  ->add('url', '不是網址格式')->rule('valid_url')
-			  ->add('ip', '不是 IP 地址格式')->rule('valid_ip')
-			  ->add('title', '不是純字母')->rule('valid_string')
-			  ->add('age', '小於 18 歲')->rule('numeric_min', 18)
-			  ->add('age', '大於 16 歲')->rule('numeric_max', 16)
-			  ->add('custom', '自定格式不正確')->rule('custom', function($val) {
+	$validator->add('username', 'Pleas enter username')->rule('required')
+			  ->add('username', 'The username must less than 4 char')->rule('min_length', 4)
+			  ->add('password', 'Password not match input value')->rule('match_value', $data['confirm_password'])
+			  ->add('first_name', 'The first name not match given pattern')->rule('match_pattern', '/^[A-Za-z]/')
+			  ->add('password', 'Password not match given field')->rule('match_field', 'confirm_password')
+			  ->add('confirm_password', 'Confirm password must more than 4 char')->rule('min_length', 4)
+			  ->add('telephone', 'The telephone number must less than 8 char')->rule('max_length', 8)
+			  ->add('telephone', 'The telephone number length must equals 8 char')->rule('exact_length', 8)
+			  ->add('email', 'Invalid email address')->rule('valid_email')
+			  ->add('url', 'Invalid email address')->rule('valid_url')
+			  ->add('ip', 'Invalid ip address')->rule('valid_ip')
+			  ->add('title', 'The string is not alpha string')->rule('valid_string')
+			  ->add('age', 'The age must less than 18 age')->rule('numeric_min', 18)
+			  ->add('age', 'The age must bigger than 16 age')->rule('numeric_max', 16)
+			  ->add('custom', 'The value is not much the custom format')->rule('custom', function($val) {
 						return preg_match('/2001\-10/', $val) > 0;
 				})->rule('valid_string', array('utf8', 'alpha', 'lowercase'));
 
 Finally, when you added rules completely, you can run the checking.
 
-	if ($validator->run() === true) {
+	if ($validator->inValid() === true) {
 		foreach($validator->errors() as $error) {
 			echo "<p>",$error,"</p>";
 		}
 	}
 
-The method `$validator->run()` or alias method `$validator->valid()` will return the status of validation (true is contain error), the `$validator->error()` will contain all error messages. if you just want to show first error message, you can use method: `$validator->first_error()`
+The method `$validator->inValid()` or alias method `$validator->valid()` will return the status of validation (true is contain error), the `$validator->error()` will contain all error messages. if you just want to show first error message, you can use method: `$validator->first_error()`
 
-	if ($validator->run() === true) {
+	if ($validator->inValid() === true) {
 		echo $validator->first_error(); // pop first error
 	}
 
