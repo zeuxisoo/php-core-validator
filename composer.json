@@ -1,10 +1,10 @@
 {
-	"name": "zeuxisoo/validator",
+	"name": "zeuxisoo/core-validator",
 	"version": "0.1.0",
 	"type": "library",
 	"description": "PHP validator for form data",
 	"keywords": ["validation", "validator", "Form"],
-	"homepage": "https://github.com/zeuxisoo/php-validator/",
+	"homepage": "https://github.com/zeuxisoo/php-validator",
 	"license": "BSD-2-Clause",
 	"authors": [{
 		"name": "Zeuxis.Lo",
