@@ -4,7 +4,7 @@
 	"type": "library",
 	"description": "PHP validator for form data",
 	"keywords": ["validation", "validator", "Form"],
-	"homepage": "https://github.com/zeuxisoo/php-validator",
+	"homepage": "https://github.com/zeuxisoo/php-core-validator",
 	"license": "BSD-2-Clause",
 	"authors": [{
 		"name": "Zeuxis.Lo",
