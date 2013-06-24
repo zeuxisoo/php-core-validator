@@ -1,3 +1,21 @@
+### Installation
+
+Install the composer
+
+	curl -sS https://getcomposer.org/installer | php
+
+Edit composer.json
+
+	{
+		"require": {
+			"zeuxisoo/core-validator": "dev-master"
+		}
+	}
+
+Install/update your dependencies
+
+	php composer.phar install
+
 ### Usage
 
 Load the validation library
