@@ -202,5 +202,21 @@ class Validator {
 	public function custom($val, $callback) {
 		return call_user_func_array($callback, array($val));
 	}
+
+	public function is_true($val, $callback) {
+		return $this->custom($val, $callback) == true;
+	}
+
+	public function is_false($val, $callback) {
+		return $this->custom($val, $callback) == false;
+	}
+
+	public function between($val, $between) {
+		return in_array($val, $between);
+	}
+
+	public function key_exists($val, $keys_val) {
+		return array_key_exists($val, $keys_val);
+	}
 }
-?>
+

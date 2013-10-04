@@ -41,6 +41,8 @@ The example of $_POST like:
 		'title' => '123a',
 		'age' => 17,
 		'custom' => "2001-12",
+		'gender' => 'boy',
+		'zip_code' => 1002,
 	);
 
 Then, add the **target keys/fields** and **checking rules**
@@ -63,6 +65,18 @@ Then, add the **target keys/fields** and **checking rules**
 	$validator->add('custom', 'The value is not much the custom format')->rule('custom', function($val) {
 		return preg_match('/2001\-10/', $val) > 0;
 	});
+	$validator->add('name', 'The name is equals to Tomcat')->rule('is_true', function($val) {
+		return $val === "Tomcat";
+	});
+	$validator->add('name', 'The name is not equals to Cattom')->rule('is_false', function($val) {
+		return $val === "Cattom";
+	});
+	$validator->add('gender', "The gender is supported")->rule('between', array('boy', 'girl'));
+	$validator->add('zip_code', 'The zip code is not exists')->rule('key_exists', array(
+		1002 => "B",
+		1003 => "C",
+		1004 => "D",
+	));
 
 But, you can make it chainable like
 
@@ -81,8 +95,21 @@ But, you can make it chainable like
 			  ->add('age', 'The age must less than 18 age')->rule('numeric_min', 18)
 			  ->add('age', 'The age must bigger than 16 age')->rule('numeric_max', 16)
 			  ->add('custom', 'The value is not much the custom format')->rule('custom', function($val) {
-						return preg_match('/2001\-10/', $val) > 0;
-				})->rule('valid_string', array('utf8', 'alpha', 'lowercase'));
+					return preg_match('/2001\-10/', $val) > 0;
+				})->rule('valid_string', array('utf8', 'alpha', 'lowercase'))
+			  ->add('name', 'The name is equals to Tomcat')->rule('is_true', function($val) {
+			  		return $val === "Tomcat";
+				})
+			  ->add('name', 'The name is not equals to Cattom')->rule('is_false', function($val) {
+					return $val === "Cattom";
+				})
+			  ->add('gender', "The gender is supported")->rule('between', array('boy', 'girl'));
+			  ->add('zip_code', 'The zip code is not exists')->rule('key_exists', array(
+					1002 => "B",
+					1003 => "C",
+					1004 => "D",
+			  ));
+
 
 Finally, when you added rules completely, you can run the checking.
 
@@ -114,3 +141,7 @@ All avaliable method:
 	numeric_min, 18
 	numeric_max, 16
 	custom, callback
+	is_true, callback             (callback result is true)
+	is_false, callback            (callback result is false)
+	between, array('HK', 'TW')
+	key_exists, array(1 => 'A',)

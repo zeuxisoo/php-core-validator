@@ -139,4 +139,48 @@ class RuleTest extends PHPUnit_Framework_TestCase {
 
 		$this->assertTrue($validator->inValid());
 	}
+
+	public function testIsTrueRule() {
+		$validator = new Validator(array(
+			'name' => "Tomcat",
+		));
+		$validator->add("name", "The names are equal")->rule('is_true', function($val) {
+			return $val === "Tomcat";
+		});
+
+		$this->assertTrue($validator->valid());
+	}
+
+	public function testIsFalseRule() {
+		$validator = new Validator(array(
+			'name' => "Tomcat",
+		));
+		$validator->add("name", "The name are not equal")->rule('is_false', function($val) {
+			return $val === "Cattom";
+		});
+
+		$this->assertFalse($validator->inValid());
+	}
+
+	public function testInValidBetweenRule() {
+		$validator = new Validator(array(
+			'gender' => "unknown",
+		));
+		$validator->add("gender", "The gender is supported")->rule('between', array('boy', 'girl'));
+
+		$this->assertTrue($validator->inValid());
+	}
+
+	public function testInValidKeyExistsRule() {
+		$validator = new Validator(array(
+			'zip_code' => 1001,
+		));
+		$validator->add("zip_code", "The zip code is not exists")->rule('key_exists', array(
+			1002 => "B",
+			1003 => "C",
+			1004 => "D",
+		));
+
+		$this->assertTrue($validator->inValid());
+	}
 }
