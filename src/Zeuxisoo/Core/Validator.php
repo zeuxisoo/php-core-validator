@@ -32,8 +32,10 @@ class Validator {
 	}
 
 	public function rule($name) {
+		$arguments = func_get_args();
+
 		$this->current_rule_data['rule']['name'] = $name;
-		$this->current_rule_data['rule']['args'] = array_splice(func_get_args(), 1);
+		$this->current_rule_data['rule']['args'] = array_splice($arguments, 1);
 
 		$this->rule_datas[] = $this->current_rule_data;
 		return $this;
