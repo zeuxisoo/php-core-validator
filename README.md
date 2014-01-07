@@ -1,3 +1,7 @@
+### Status
+
+[![Build Status](https://travis-ci.org/zeuxisoo/php-core-validator.png?branch=master)](https://travis-ci.org/zeuxisoo/php-core-validator)
+
 ### Installation
 
 Install the composer
