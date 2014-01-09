@@ -123,10 +123,10 @@ Finally, when you added rules completely, you can run the checking.
 		}
 	}
 
-The method `$validator->inValid()` or alias method `$validator->valid()` will return the status of validation (true is contain error), the `$validator->error()` will contain all error messages. if you just want to show first error message, you can use method: `$validator->first_error()`
+The method `$validator->inValid()` or alias method `$validator->valid()` will return the status of validation (true is contain error), the `$validator->error()` will contain all error messages. if you just want to show first error message, you can use method: `$validator->firstError()`
 
 	if ($validator->inValid() === true) {
-		echo $validator->first_error(); // pop first error
+		echo $validator->firstError(); // pop first error
 	}
 
 All avaliable method:

@@ -68,7 +68,7 @@ class Validator {
 		return $this->errors;
 	}
 
-	public function first_error() {
+	public function firstError() {
 		return isset($this->errors[0]) ? $this->errors[0] : "";
 	}
 

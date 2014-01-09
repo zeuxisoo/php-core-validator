@@ -9,7 +9,7 @@ class MessageTest extends PHPUnit_Framework_TestCase {
 		$validator->add("username", "Please enter username")->rule('required');
 		$validator->inValid();
 
-		$this->assertEquals("Please enter username", $validator->first_error());
+		$this->assertEquals("Please enter username", $validator->firstError());
 	}
 
 	public function testErrorsMethod() {
