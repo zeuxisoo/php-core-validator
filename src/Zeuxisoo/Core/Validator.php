@@ -206,11 +206,11 @@ class Validator {
 	}
 
 	public function is_true($val, $callback) {
-		return $this->custom($val, $callback) == true;
+		return $this->custom($val, $callback) == false;
 	}
 
 	public function is_false($val, $callback) {
-		return $this->custom($val, $callback) == false;
+		return $this->custom($val, $callback) == true;
 	}
 
 	public function between($val, $between) {

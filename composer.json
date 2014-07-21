@@ -1,6 +1,6 @@
 {
 	"name": "zeuxisoo/core-validator",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"type": "library",
 	"description": "PHP validator for form data",
 	"keywords": ["validation", "validator", "Form"],

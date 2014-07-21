@@ -148,7 +148,7 @@ class RuleTest extends PHPUnit_Framework_TestCase {
 			return $val === "Tomcat";
 		});
 
-		$this->assertTrue($validator->valid());
+		$this->assertTrue($validator->inValid());
 	}
 
 	public function testIsFalseRule() {
@@ -159,7 +159,7 @@ class RuleTest extends PHPUnit_Framework_TestCase {
 			return $val === "Cattom";
 		});
 
-		$this->assertFalse($validator->inValid());
+		$this->assertTrue($validator->inValid());
 	}
 
 	public function testInValidBetweenRule() {
